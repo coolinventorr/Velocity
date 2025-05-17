@@ -209,6 +209,15 @@ public interface ProxyServer extends Audience {
   ProxyVersion getVersion();
 
   /**
+   * Obtains the {@link com.velocitypowered.api.proxy.chain.ProxyChainManager} instance
+   * used to manage chained proxies.
+   *
+   * @return the proxy chain manager
+   * @since 3.3.0
+   */
+  com.velocitypowered.api.proxy.chain.ProxyChainManager getProxyChainManager();
+
+  /**
    * Creates a builder to build a {@link ResourcePackInfo} instance for use with
    * {@link com.velocitypowered.api.proxy.Player#sendResourcePackOffer(ResourcePackInfo)}.
    *

@@ -34,3 +34,8 @@ and you can configure it from there.
 
 Alternatively, you can get the proxy JAR from the [downloads](https://papermc.io/downloads/velocity)
 page.
+
+### Proxy chaining
+
+Velocity includes optional support for chaining multiple proxy instances together.
+Configuration and usage is documented in `docs/proxy-chaining.md`.
