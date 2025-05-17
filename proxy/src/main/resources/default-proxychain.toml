@@ -1,0 +1,4 @@
+secret = "change_me"
+
+[proxies]
+# proxy2 = "127.0.0.1:25566"
