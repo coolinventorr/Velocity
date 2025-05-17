@@ -1,0 +1,6 @@
+secret = "changeme"
+
+[proxies]
+# Configure remote proxies here. Each key is the proxy name and the value is "host:port".
+# example:
+# proxy2 = "127.0.0.1:25566"

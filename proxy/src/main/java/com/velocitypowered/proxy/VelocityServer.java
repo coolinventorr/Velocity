@@ -44,6 +44,7 @@ import com.velocitypowered.proxy.command.builtin.GlistCommand;
 import com.velocitypowered.proxy.command.builtin.SendCommand;
 import com.velocitypowered.proxy.command.builtin.ServerCommand;
 import com.velocitypowered.proxy.command.builtin.ShutdownCommand;
+import com.velocitypowered.proxy.command.builtin.ChainCommand;
 import com.velocitypowered.proxy.command.builtin.VelocityCommand;
 import com.velocitypowered.proxy.config.VelocityConfiguration;
 import com.velocitypowered.proxy.connection.client.ConnectedPlayer;
@@ -105,6 +106,7 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.translation.GlobalTranslator;
 import net.kyori.adventure.translation.TranslationRegistry;
+import com.velocitypowered.proxy.chain.VelocityProxyChainManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bstats.MetricsBase;
@@ -170,6 +172,7 @@ public class VelocityServer implements ProxyServer, ForwardingAudience {
   private final VelocityScheduler scheduler;
   private final VelocityChannelRegistrar channelRegistrar = new VelocityChannelRegistrar();
   private final ServerListPingHandler serverListPingHandler;
+  private final VelocityProxyChainManager chainManager;
 
   VelocityServer(final ProxyOptions options) {
     pluginManager = new VelocityPluginManager(this);
@@ -180,6 +183,7 @@ public class VelocityServer implements ProxyServer, ForwardingAudience {
     cm = new ConnectionManager(this);
     servers = new ServerMap(this);
     serverListPingHandler = new ServerListPingHandler(this);
+    chainManager = new VelocityProxyChainManager(this);
     this.options = options;
   }
 
@@ -284,6 +288,13 @@ public class VelocityServer implements ProxyServer, ForwardingAudience {
     );
     new GlistCommand(this).register();
     new SendCommand(this).register();
+    final BrigadierCommand chainCommand = new ChainCommand(this).create();
+    commandManager.register(
+        commandManager.metaBuilder(chainCommand)
+            .plugin(VelocityVirtualPlugin.INSTANCE)
+            .build(),
+        chainCommand
+    );
 
     this.doStartupConfigLoad();
 
@@ -815,6 +826,11 @@ public class VelocityServer implements ProxyServer, ForwardingAudience {
   @Override
   public VelocityChannelRegistrar getChannelRegistrar() {
     return channelRegistrar;
+  }
+
+  @Override
+  public VelocityProxyChainManager getProxyChainManager() {
+    return chainManager;
   }
   
   @Override

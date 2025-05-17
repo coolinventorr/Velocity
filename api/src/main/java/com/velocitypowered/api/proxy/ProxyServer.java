@@ -13,6 +13,7 @@ import com.velocitypowered.api.event.EventManager;
 import com.velocitypowered.api.plugin.PluginManager;
 import com.velocitypowered.api.proxy.config.ProxyConfig;
 import com.velocitypowered.api.proxy.messages.ChannelRegistrar;
+import com.velocitypowered.api.proxy.chain.ProxyChainManager;
 import com.velocitypowered.api.proxy.player.ResourcePackInfo;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import com.velocitypowered.api.proxy.server.ServerInfo;
@@ -187,6 +188,13 @@ public interface ProxyServer extends Audience {
   ChannelRegistrar getChannelRegistrar();
 
   /**
+   * Provides access to the proxy chaining manager.
+   *
+   * @return the proxy chain manager
+   */
+  ProxyChainManager getProxyChainManager();
+
+  /**
    * Gets the address that this proxy is bound to. This does not necessarily indicate the external
    * IP address of the proxy.
    *
@@ -230,3 +238,4 @@ public interface ProxyServer extends Audience {
    */
   ResourcePackInfo.Builder createResourcePackBuilder(String url);
 }
+
