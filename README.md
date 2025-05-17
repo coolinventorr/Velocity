@@ -34,3 +34,9 @@ and you can configure it from there.
 
 Alternatively, you can get the proxy JAR from the [downloads](https://papermc.io/downloads/velocity)
 page.
+
+### Proxy chaining example
+
+An example plugin demonstrating how to chain multiple Velocity proxies with a
+simple authentication mechanism is provided in `proxy-chain-example`. See
+`docs/proxy-chaining.md` for instructions.
